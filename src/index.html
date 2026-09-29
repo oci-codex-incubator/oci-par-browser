@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>OCI PAR Browser</title><link rel="stylesheet" href="styles.css" /></head>
+  <body>
+    <header>
+      <div class="brand"><span class="mark">◈</span><span>OCI PAR Browser</span></div>
+      <form id="url-form">
+        <input id="url" type="url" autocomplete="off" spellcheck="false" placeholder="Paste an OCI pre-authenticated request URL" aria-label="OCI PAR URL" required />
+        <button type="submit">Open</button>
+      </form>
+      <label class="view-control">View
+        <select id="view-mode" title="Choose the object browser or raw response view" disabled>
+          <option value="objects">Object browser</option>
+          <option value="raw">Raw response</option>
+        </select>
+      </label>
+      <span id="access" class="access unknown">Write access unknown</span>
+      <button id="upload" class="quiet" title="Choose a file to upload">Upload file</button>
+      <button id="folder" class="quiet" title="Create a zero-byte folder marker">New folder</button>
+      <button id="auto-refresh" class="quiet" title="Cycle automatic object-list refresh interval">Auto-refresh: None</button>
+      <button id="close" class="quiet" title="Close current page">Close</button>
+    </header>
+    <aside>
+      <div class="aside-head"><h2>Recent links</h2><button id="clear" class="text-button">Clear</button></div>
+      <p class="hint">Saved only on this device. A PAR link grants access—handle it like a password.</p>
+      <label class="custom"><input id="custom-host" type="checkbox" /> Allow custom OCI host</label>
+      <div id="history" class="history" aria-live="polite"></div>
+    </aside>
+    <main id="workspace">
+      <div class="empty-card">
+        <div class="empty-icon">⌁</div>
+        <h1>Open an OCI object</h1>
+        <p>Paste a pre-authenticated request URL to browse or download its available content.</p>
+        <p class="small">The page will load in the secure viewer on the right. External links open in your default browser.</p>
+      </div>
+    </main>
+    <div id="toast" role="alert"></div>
+    <dialog id="folder-dialog" aria-labelledby="folder-dialog-title">
+      <form id="folder-form" method="dialog">
+        <h2 id="folder-dialog-title">Create folder</h2>
+        <p>Creates an empty Object Storage marker whose name ends in <code>/</code>.</p>
+        <label for="folder-name">Folder name</label>
+        <input id="folder-name" name="folder-name" type="text" autocomplete="off" placeholder="e.g. releases/2026" required />
+        <div class="dialog-actions">
+          <button id="folder-cancel" type="button" class="quiet">Cancel</button>
+          <button value="create" type="submit">Create folder</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="object-menu" class="object-menu hidden" role="menu">
+      <button id="delete-unavailable" type="button" role="menuitem">Delete unavailable with PAR</button>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

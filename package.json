@@ -1,0 +1,34 @@
+{
+  "name": "oci-par-browser",
+  "version": "0.2.3",
+  "author": "OCI PAR Browser contributors",
+  "description": "A safe desktop browser for Oracle Cloud Infrastructure pre-authenticated requests.",
+  "main": "src/main.js",
+  "engines": { "node": ">=20 <27" },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js",
+    "package:win": "electron-builder --win nsis --x64 --publish never",
+    "package:win:dir": "electron-builder --win --dir --x64 --publish never",
+    "package:mac": "electron-builder --mac dmg --arm64 --publish never",
+    "package:mac:x64": "electron-builder --mac dmg --x64 --publish never"
+  },
+  "build": {
+    "appId": "com.ociparbrowser.desktop",
+    "productName": "OCI PAR Browser",
+    "files": ["src/**/*", "package.json"],
+    "directories": { "output": "dist" },
+    "win": { "target": ["nsis"], "publish": null },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": { "target": ["dmg"], "category": "public.app-category.utilities", "publish": null }
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  }
+}
